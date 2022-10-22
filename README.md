@@ -207,5 +207,5 @@ This code borrows heavily from [restyle](https://github.com/yuval-alaluf/restyle
 ## Contact
 If you want to contact me:
 ```
-Contact : jmk94810@korea.ac.kr
+Contact : mjeon@broadinstitute.org
 ```

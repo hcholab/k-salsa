@@ -29,14 +29,14 @@ Please download the pretrained models from the following links.
 ### ReStyle + pSp
 | Path | Description
 | :--- | :----------
-|[APTOS - ReStyle + pSp]()  | ReStyle applied over pSp trained on the [APTOS](https://www.kaggle.com/c/aptos2019-blindness-detection) dataset.
-
-|[EyePACS - ReStyle + pSp]()  | ReStyle applied over pSp trained on the [EyePACS](https://www.kaggle.com/c/diabetic-retinopathy-detection/data) dataset.
+| [APTOS - ReStyle + pSp](https://drive.google.com/file/d/1QDNLy4U7NzPHuttRF7hFELGO7OUxvc2t/view?usp=share_link)  | ReStyle applied over pSp trained on the [APTOS](https://www.kaggle.com/c/aptos2019-blindness-detection) dataset.
+| [EyePACS - ReStyle + pSp](https://drive.google.com/file/d/1UZe8bjP3HgKRGVD5IicA9mlwyLBQ9XM_/view?usp=share_link)  | ReStyle applied over pSp trained on the [EyePACS](https://www.kaggle.com/c/diabetic-retinopathy-detection/data) dataset.
 
 ### StyleGAN2-ADA
-|[APTOS - StyleGAN2-ADA]()  | StyleGAN2-ADA trained on the [APTOS](https://www.kaggle.com/c/aptos2019-blindness-detection) dataset.
-
-|[EyePACS - StyleGAN2-ADA]()  | StyleGAN2-ADA trained on the [EyePACS](https://www.kaggle.com/c/diabetic-retinopathy-detection/data) dataset.
+| Path | Description
+| :--- | :----------
+| [APTOS - StyleGAN2-ADA](https://drive.google.com/file/d/1-oXwmpXOqyBMX-5dk-TewWjeVg9gyd27/view?usp=share_link)  | StyleGAN2-ADA trained on the [APTOS](https://www.kaggle.com/c/aptos2019-blindness-detection) dataset.
+| [EyePACS - StyleGAN2-ADA](https://drive.google.com/file/d/1Rb8P2A_meNcy39YTXDO-lornfJMzQn2z/view?usp=share_link)  | StyleGAN2-ADA trained on the [EyePACS](https://www.kaggle.com/c/diabetic-retinopathy-detection/data) dataset.
 
 ### Auxiliary Models
 In addition, we provide various auxiliary models needed for training your own ReStyle models from scratch.  

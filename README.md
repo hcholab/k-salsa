@@ -78,7 +78,7 @@ DATASETS = {
 3. To train with your newly defined dataset, simply use the flag `--dataset_type my_data_encode`.
 
 ### Preparing your Generator
-In this work, we use rosinality's [StyleGAN2 implementation](https://github.com/rosinality/stylegan2-pytorch). 
+In this work, we use [StyleGAN2-ADA implementation](https://github.com/NVlabs/stylegan2-ada-pytorch). 
 
 If you wish to use your own generator trained using NVIDIA's implementation there are a few options we recommend:
    Using NVIDIA's StyleGAN-ADA PyTorch implementation.  

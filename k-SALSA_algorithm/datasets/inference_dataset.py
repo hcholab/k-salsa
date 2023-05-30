@@ -34,10 +34,10 @@ class Clustering_Dataset(Dataset):
 		return len(self.df)
 
 	def __getitem__(self, index):
-		if self.opts.data == 'aptos':
+		if self.opts.data == 'aptos' or 'aptos_test':
 			image_id = self.df['id_code'][index]
 			from_im = Image.open(f'{self.data_path}/{image_id}.png').convert('RGB')
-		elif self.opts.data == 'eyepacs':
+		elif self.opts.data == 'eyepacs' or 'eyepacs_test':
 			image_id = self.df['image'][index]
 			from_im = Image.open(f'{self.data_path}/{image_id}.jpeg').convert('RGB')
 		
@@ -52,9 +52,9 @@ class InferenceDataset_for_centroid(Dataset):
 		group_by_centers=labels.groupby(['centers'])
 
 		self.lst = []
-		if opts.data == 'aptos':
+		if opts.data == 'aptos' or 'aptos_test':
 			self.extension = '.png'
-		elif opts.data == 'eyepacs':
+		elif opts.data == 'eyepacs' or 'eyepacs_test':
 			self.extension = '.jpeg'
 
 		for i in range(len(group_by_centers)):

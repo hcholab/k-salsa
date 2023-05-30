@@ -262,9 +262,9 @@ def same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts):
         add = centroid_idx[i]
         num_count_centers_lst.append(counts[add])
     
-    if opts.data == 'aptos':
+    if opts.data == 'aptos' or 'aptos_test':
         id_code = train_df['id_code']
-    elif opts.data == 'eyepacs':
+    elif opts.data == 'eyepacs' or 'eyepacs_test':
         id_code = train_df['image']
 
     new_data = {'id_code': id_code,
@@ -310,7 +310,7 @@ def run_projection():
     avg_image = get_average_image(net, opts)
 
     # Same Size Clustering
-    # same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts)
+    same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts)
 
     
 

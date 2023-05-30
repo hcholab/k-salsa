@@ -17,6 +17,13 @@ DATASETS = {
 		'test_source_root': dataset_paths['aptos2019_test'],
 		'test_target_root': dataset_paths['aptos2019_test'],
 	},
+ 	'finetune_encode': {
+		'transforms': transforms_config.EncodeTransforms,
+		'train_source_root': dataset_paths['aptos2019_train'],
+		'train_target_root': dataset_paths['aptos2019_train'],
+		'test_source_root': dataset_paths['aptos2019_test'],
+		'test_target_root': dataset_paths['aptos2019_test'],
+	},
 	'odir_encode': {
 		'transforms': transforms_config.EncodeTransforms,
 		'train_source_root': dataset_paths['odir_train'],

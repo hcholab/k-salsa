@@ -77,12 +77,13 @@ def nearestNeighborClust(D, clust_size=2):
 def compute_features(eval_loader, model, avg_image, opts):
     print('Computing features...')
     model.eval()
-    features = torch.zeros(len(eval_loader.dataset),512*16).cuda()
+    features = torch.zeros(len(eval_loader.dataset),512*14).cuda()
     for i, (images, index, from_path) in enumerate(eval_loader):
         with torch.no_grad():
             images = images.cuda(non_blocking=True)
             _, result_batch, result_latents, feat = run_on_batch(images, model, opts, avg_image, computing_features=True)
             feat = feat.view(feat.shape[0],-1)
+            # print('feat:',feat.shape)
             features[index] = feat
     return features.cpu()
 
@@ -235,13 +236,21 @@ def same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts):
     features = compute_features(dataloader, net, avg_image, opts)
     features = features.numpy()
     # Model Save and Load
-    save('./save/'+opts.data+'/features/k' +str(opts.same_k) +'_features.npy', features)
+    file_name = './save/'+opts.data+'/features/k' +str(opts.same_k)
+    if not os.path.exists(file_name):
+        os.makedirs(file_name)
+    
+    save(file_name +'_features.npy', features)
+        
     # features = load('./save/'+opts.data+'/features/k' +str(opts.same_k) +'_features.npy')
     
     predistance = scipy.spatial.distance.squareform(scipy.spatial.distance.pdist(features))
     centroid_idx = nearestNeighborClust(predistance, clust_size=opts.same_k)
     # Model Save and Load
-    # save('./save/'+opts.data+'/labels/k'+str(opts.same_k)+'_nearest_centroids_idx.npy', centroid_idx)
+    file_name = './save/'+opts.data+'/labels/k'+str(opts.same_k)
+    if not os.path.exists(file_name):
+        os.makedirs(file_name)
+    save(file_name+'_nearest_centroids_idx.npy', centroid_idx)
     # centroid_idx = load('./save/'+opts.data+'/labels/k'+str(opts.same_k)+'_nearest_centroids_idx.npy')
 
     counts = dict()
@@ -263,7 +272,10 @@ def same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts):
            'count_centers':np.array(num_count_centers_lst)}
     
     new_df = pd.DataFrame(new_data, columns=['id_code','centers','count_centers']) 
-    new_df.to_csv('./save/'+opts.data+'/labels/k'+str(opts.same_k)+'_nearest_df.csv', index=False)
+    file_name = './save/'+opts.data+'/labels/k'+str(opts.same_k)
+    if not os.path.exists(file_name):
+        os.makedirs(file_name)
+    new_df.to_csv(file_name+'_nearest_df.csv', index=False)
     a = np.unique(centroid_idx, return_counts=True)
     each_clusters = a[1]
     count_cluster = Counter(each_clusters)
@@ -298,7 +310,9 @@ def run_projection():
     avg_image = get_average_image(net, opts)
 
     # Same Size Clustering
-    same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts)
+    # same_size_cluster(net, avg_image, dataset_args, transforms_dict, opts)
+
+    
 
     labels = pd.read_csv('./save/'+opts.data+'/labels/k'+str(opts.same_k)+'_nearest_df.csv')
     dataset = InferenceDataset_for_centroid(root=opts.data_path,

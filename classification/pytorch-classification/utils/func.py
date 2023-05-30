@@ -39,7 +39,7 @@ def parse_config():
     parser.add_argument('--df', type=str, default='/home/unix/mjeon/ECCV2022/privacy/ECCV2022/restyle-same-size-kmeans/ECCV/aptos/nearest_neighbor_centroid/labels/k5_aptos_nearest_df.csv', help='df')
     parser.add_argument('--labels_train', type=str, default='/home/unix/mjeon/k-SALSA/classification_nearest/aptos_val_3000.csv', help='labels for train')
     parser.add_argument('--labels_test', type=str, default='/home/unix/mjeon/data/splited_val/aptos/val_splited.csv', help='labels for test')
-    parser.add_argument('--is_centroid', type=bool, default=False, help='whether data is centroid or not')
+    parser.add_argument('--is_centroid', type=str, default='False', help='whether data is centroid or not')
     
     args = parser.parse_args()
     return args

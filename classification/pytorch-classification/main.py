@@ -45,7 +45,7 @@ class aptos_centroid_dataset(Dataset):
     
     def __getitem__(self,index):
         image_id = self.fname_lst[index]
-        if self.is_centroid:
+        if self.is_centroid == 'True':
             image = Image.open(f'{self.data_path}/{image_id}_centroids.png') #Image.
         else:
             image = Image.open(f'{self.data_path}/{image_id}.png') 
@@ -119,7 +119,7 @@ def epi(trial):
     args = parse_config()
     cfg = load_config(args.config)
 
-    wandb.init(project="aptos_cls_k-SALSA", entity="eccv2022_")
+    wandb.init(project="aptos_cls_k-SALSA_ICLR2024")
     ################################################
     ############ CHECK
     ################################################
@@ -140,7 +140,7 @@ def epi(trial):
         "lambda1": args.lambda1,
         "lambda2": args.lambda2
     }
-
+    print('save_path:',save_path)
 #     pdb.set_trace()
     if os.path.exists(save_path):
         warning = 'Save path {} exists.\nDo you want to overwrite it? (y/n)\n'.format(save_path)
@@ -188,7 +188,8 @@ def epi(trial):
     print([max_label.tolist().count(i)/len(max_label) for i in range(5)])
     print('group_by_centers_aptos:',len(group_by_centers_aptos))
     print('fname_lst:', len(fname_lst))
-
+    print('images_path:',images_path)
+    print('is_centroid:',args.is_centroid)
     train_dataset = aptos_centroid_dataset(fname_lst,images_path,aptos_normalized_labels_npy,image_transform=train_transform, is_centroid=args.is_centroid)
 
     test_df = pd.read_csv(args.labels_test)
@@ -246,8 +247,9 @@ def set_random_seed(seed):
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
-    torch.backends.cudnn.deterministic = True
-
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = False
 
 if __name__ == '__main__':
+    set_random_seed(seed=125)
     main()

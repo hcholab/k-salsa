@@ -20,11 +20,12 @@ CUDA_VISIBLE_DEVICES=0 python main.py -config ./configs/aptos.yaml --images_path
 
 <!-- MIA -->
 # Train
-CUDA_VISIBLE_DEVICES=0 python MIA_train.py \
---epochs=50 \
---samek=5 \
---centroid_type=centroid_ours \
---data=aptos
+## k-salsa
+CUDA_VISIBLE_DEVICES=0 python MIA_train.py --train_df_path=../k-SALSA_algorithm/save/aptos/labels/ --train_image_path=/home/mjeon/data/ECCV_dataset/aptos/aptos_val_3000 --centroid_image_path=../k-SALSA_algorithm/new_exp_aptos_k5_crop4_1e2_1e-6/style_proj/ --centroid_type=centroid_ours --data=aptos
+
+## centroid
+CUDA_VISIBLE_DEVICES=2 python MIA_train.py --train_df_path=../k-SALSA_algorithm/save/aptos/labels/ --train_image_path=/home/mjeon/data/ECCV_dataset/aptos/aptos_val_3000 --centroid_image_path=../k-SALSA_algorithm/new_exp_aptos_k5_crop4_1e2_1e-6/centroid/ --centroid_type=centroid --data=aptos
+
 
 # Test
 train_df_path

@@ -56,7 +56,7 @@ parser.add_argument('--lr', default=0.0001, type=float, help='learning rate')
 parser.add_argument('--epochs', default=50, type=int, help='learning rate')
 parser.add_argument('--samek', default=5, type=int, help='learning rate')
 parser.add_argument('--mult_batch', default=5, type=int, help='learning rate')
-parser.add_argument('--train_df_path', default='../k-SALSA_algorithm/ECCV/aptos/labels/', type=str)
+parser.add_argument('--train_df_path', default='../k-SALSA_algorithm/save/aptos/labels/', type=str)
 parser.add_argument('--train_image_path', default='./data/aptos_train', type=str)
 parser.add_argument('--centroid_image_path', default='../k-SALSA_algorithm/aptos_k5_ours/', type=str)
 parser.add_argument('--centroid_type', default='centroid_ours')
@@ -86,7 +86,11 @@ dirs = glob.glob(args.centroid_image_path+'*')
 dirs = sorted(dirs)
 cid2iid = {}
 for dir_ in dirs:
-    img_id = dir_.split('/')[-1].split('.')[0]
+    if args.centroid_type =='centroid':
+        img_id = dir_.split('/')[-1].split('.')[0][:-10]
+    elif args.centroid_type == 'centroid_ours':
+        img_id = dir_.split('/')[-1].split('.')[0]
+    # print('img_id:',img_id)
     cluster_id = train_df[train_df['id_code'] == img_id]['centers'].values[0]
     cid2iid[cluster_id] = img_id
 
@@ -101,7 +105,7 @@ for i in range(len(fnames)):
     fname_lst.append(fnames[i][0])
     centers_lst.append(i)
 
-train_dataset = dataset(train_df, args.train_image_path, args, image_transform=train_transform)
+train_dataset = dataset(train_df, args.train_image_path, image_transform=train_transform)
 
 train_loader = DataLoader(
     train_dataset,

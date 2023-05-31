@@ -53,7 +53,7 @@ class dataset(Dataset):
 
 parser = argparse.ArgumentParser(description='MIA Training')
 parser.add_argument('--lr', default=0.0001, type=float, help='learning rate')
-parser.add_argument('--epochs', default=50, type=int, help='learning rate')
+parser.add_argument('--epochs', default=20, type=int, help='learning rate')
 parser.add_argument('--samek', default=5, type=int, help='learning rate')
 parser.add_argument('--mult_batch', default=5, type=int, help='learning rate')
 parser.add_argument('--train_df_path', default='../k-SALSA_algorithm/save/aptos/labels/', type=str)
